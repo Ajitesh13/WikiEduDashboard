@@ -8,6 +8,7 @@ import { fetchTrainingModule, setSlideCompleted, setCurrentSlide, toggleMenuOpen
 import SlideLink from './slide_link.jsx';
 import SlideMenu from './slide_menu.jsx';
 import Quiz from './quiz.jsx';
+import WikidataItemInput from './interactives/wikidata_item_input';
 import Notifications from '../../components/common/notifications.jsx';
 
 const md = require('../../utils/markdown_it.js').default({ openLinksExternally: true });
@@ -209,6 +210,13 @@ const TrainingSlideHandler = createReactClass({
       );
     }
 
+    const hasInterative = true;
+    let interactive;
+    if (hasInterative) {
+      interactive = <WikidataItemInput />;
+    }
+
+
     let titlePrefix;
     if (this.props.training.currentSlide.title_prefix) {
       titlePrefix = (
@@ -252,6 +260,7 @@ const TrainingSlideHandler = createReactClass({
           <h1>{slideTitle}</h1>
           <div className="markdown training__slide__content" dangerouslySetInnerHTML={{ __html: rawHtml }} />
           {quiz}
+          {interactive}
           <footer className="training__slide__footer">
             <span className="pull-left">{previousLink}</span>
             {sourceLink}
